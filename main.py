@@ -15,7 +15,7 @@ icon = pygame.display.set_icon(icon_surface)
 # player
 player_x = 0
 player_y = 0
-x_increment = 1.75
+x_increment = 2
 y_increment = 1
 player_surface = pygame.image.load('sprites/player.png').convert_alpha()
 player_rect = player_surface.get_rect(midbottom = (200,350))
@@ -41,7 +41,7 @@ while running:
         player_rect.x = player_rect.x - x_increment
     if keys[pygame.K_SPACE] and player_rect.bottom >= 400:
         if on_ground:
-            player_gravity = -15
+            player_gravity = -17
             
 
     player_gravity += 1
