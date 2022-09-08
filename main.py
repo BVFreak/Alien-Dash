@@ -1,4 +1,3 @@
-from tkinter import CENTER
 import pygame
 
 pygame.init()
@@ -11,6 +10,10 @@ clock = pygame.time.Clock()
 # ufo icon
 icon_surface = pygame.image.load('sprites/ufo.png')
 icon = pygame.display.set_icon(icon_surface)
+
+# music
+alien_anthem = pygame.mixer.music.load('game_song.wav')
+pygame.mixer.music.play('alien_anthem')
 
 # player
 player_x = 0
