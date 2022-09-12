@@ -26,38 +26,46 @@ player_gravity = 0
 alien_surface = pygame.image.load('sprites/alien.png').convert_alpha()
 alien_rect = alien_surface.get_rect(midbottom = (0,386))
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
+def play():
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_d]:
-        player_rect.x += x_increment
-    if keys[pygame.K_a]:
-        player_rect.x -= x_increment
-    if keys[pygame.K_SPACE] and player_rect.bottom >= 386:
-        player_gravity = -11
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_d]:
+            player_rect.x += x_increment
+        if keys[pygame.K_a]:
+            player_rect.x -= x_increment
+        if keys[pygame.K_SPACE] and player_rect.bottom >= 386:
+            player_gravity = -11
         
 
-    screen.fill((0,0,0))
+        screen.fill((0,0,0))
     
-    screen.blit(ground_surface,(0,386))
+        screen.blit(ground_surface,(0,386))
 
 
-    player_gravity += 1
-    player_rect.y += player_gravity
-    if player_rect.bottom >= 386: player_rect.bottom = 386
-    screen.blit(player_surface,player_rect)
+        player_gravity += 1
+        player_rect.y += player_gravity
+        if player_rect.bottom >= 386: player_rect.bottom = 386
+        screen.blit(player_surface,player_rect)
 
-    alien_rect.x += 4
-    if alien_rect.x >= 800: alien_rect.x = 0
-    screen.blit(alien_surface,alien_rect)
+        alien_rect.x += 4
+        if alien_rect.x >= 800: alien_rect.x = 0
+        screen.blit(alien_surface,alien_rect)
 
-    if alien_rect.colliderect(player_rect):
-        pygame.quit()
-        exit
+        if alien_rect.colliderect(player_rect):
+            if keys[pygame.K_RETURN]:
+                play()
+            else:
+                running = False
 
-    pygame.display.update()
-    clock.tick(60)
+        pygame.display.update()
+        clock.tick(60)
+    
+    play()
