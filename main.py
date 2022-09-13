@@ -41,8 +41,7 @@ def play():
   while running:
       for event in pygame.event.get():
           if event.type == pygame.QUIT:
-              pygame.quit()
-              exit()
+              running = False
     
       if not notdead:
         screen.blit(textwhendeath_surface,textwhendeath_rect)
