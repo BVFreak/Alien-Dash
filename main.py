@@ -2,18 +2,18 @@ import pygame, sys
 
 # initialize pygame
 pygame.init()
+clock = pygame.time.Clock()
 
 pygame.font.init()
 my_font = pygame.font.SysFont('Comic Sans MS', 30)
 
 screen = pygame.display.set_mode((750, 450))
 pygame.display.set_caption('Alien Dash')
-clock = pygame.time.Clock()
 
 def play():
   
   # TEXT
-  textwhendeath_surface = my_font.render('Press return to revive, Escape to quit', False, (255, 255, 255))
+  textwhendeath_surface = my_font.render('you died, press SPACE to revive', False, (255, 255, 255))
   textwhendeath_rect = textwhendeath_surface.get_rect(center = (750/2,450/3))
   
   # icon
@@ -46,15 +46,19 @@ def play():
       if not notdead:
         screen.blit(textwhendeath_surface,textwhendeath_rect)
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_RETURN]:
+        if keys[pygame.K_SPACE]:
           play()
-        elif keys[pygame.K_ESCAPE]:
+        if keys[pygame.K_ESCAPE]:
           pygame.quit()
           exit()
 
-
       if notdead:
         keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_ESCAPE]:
+          pygame.quit()
+          exit()
+
         if keys[pygame.K_d]:
             player_rect.x += x_increment
         if keys[pygame.K_a]:
@@ -70,9 +74,11 @@ def play():
         player_gravity += 1
         player_rect.y += player_gravity
         if player_rect.bottom >= 386: player_rect.bottom = 386
+        if player_rect.x >= 725: player_rect.x = 725
+        if player_rect.x <= 0: player_rect.x = 0
         screen.blit(player_surface,player_rect)
 
-        alien_rect.x += 4
+        alien_rect.x += 5
         if alien_rect.x >= 800: alien_rect.x = 0
         screen.blit(alien_surface,alien_rect)
 
