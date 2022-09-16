@@ -1,4 +1,3 @@
-from tkinter import CENTER
 import pygame, sys
 
 # initialize pygame
@@ -102,6 +101,12 @@ def play():
         if player_rect.x >= 725: player_rect.x = 725
         if player_rect.x <= 0: player_rect.x = 0
         screen.blit(player_surface,player_rect)
+
+        if counting_time >= 10000: alien_rect.x += 2
+        if counting_time >= 20000: alien_rect.x += 3
+        if counting_time >= 30000: alien_rect.x += 4
+        if counting_time >= 40000: alien_rect.x += 5
+        if counting_time >= 50000: alien_rect.x += 6
 
         alien_rect.x += 4
         if alien_rect.x >= 800: alien_rect.x = -100
